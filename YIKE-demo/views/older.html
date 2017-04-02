@@ -1,0 +1,37 @@
+<!-- 渲染获取到的数据、  date是http获取的date，通过$scope到视图的 -->
+<!-- <div class="mark">{{date}}</div> -->
+
+<!-- 不是自己想要的日期格式，就调用时间过滤器，并指定格式 -->
+<div class="mark" ng-hide="!loaded">{{date|date:"ddMMM"}}</div>
+
+
+<ul class="posts large">
+    <!-- 遍历数据 -->
+    <li ng-repeat = "post in posts">
+        <span href = "javascript:;" class="tag" ng-if="post.column.name">
+        {{post.column.name}}
+        </span>
+        <div class="cont">
+
+            <h3>{{post.title}}</h3>
+
+            <div class="brief">
+                <!-- 纯文字 -->
+                <p ng-class="{only:post.dispaly_style == 10001}" ng-if = "post.display_style !==10003">
+                    {{post.abstract}}
+                </p>
+
+                <!-- 图片加文字 -->
+                <div class="thumb" ng-if="post.display_style == 10002">
+                    <!-- <p> {{post.abstract}}</p> -->
+                    <img ng-src="{{post.thumbs[0].small.url}}" alt="">
+                </div>
+            
+                <!-- 纯图片 -->
+                <div class="gallery" ng-if="post.display_style == 10003">
+                    <img ng-src="{{post.thumbs[0].small.url}}" alt="">
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
